@@ -17,6 +17,8 @@ class MarkdownEditorAsset extends AssetBundle
         'css/editormd.custom.css'
     ];
     public $depends = [
-        'yii\web\JqueryAsset',
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapPluginAsset',
+        'rmrevin\yii\fontawesome\AssetBundle',
     ];
 }

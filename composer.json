@@ -14,7 +14,8 @@
         "email": "ningkai.wang@live.com"
     }],
     "require": {
-        "yiisoft/yii2": "*"
+        "yiisoft/yii2": "*",
+        "rmrevin/yii2-fontawesome": "*"
     },
     "autoload": {
         "psr-4": {
