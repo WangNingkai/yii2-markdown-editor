@@ -15,8 +15,6 @@ class MarkdownEditorWidget extends InputWidget
      * @var array
      */
     public $clientOptions = [];
-
-    public $textarea;
     /**
      * {@inheritDoc}
      * @see \yii\base\Object::init()
@@ -36,11 +34,22 @@ class MarkdownEditorWidget extends InputWidget
      */
     public function run()
     {
-        if ($this->hasModel()) {
-            $this->textarea = Html::activeTextArea($this->model, $this->attribute, $this->options);
+        $textarea = $this->hasModel() ? Html::activeTextArea($this->model, $this->attribute, $this->options) : Html::textArea($this->name, $this->value, $this->options);
+
+        $view = $this->getView();
+        $editor = MarkdownEditorAsset::register($view);
+        $this->clientOptions['path'] = $editor->baseUrl . '/lib/';
+
+        $jsOptions = empty ($this->clientOptions) ? '' : Json::htmlEncode($this->clientOptions);
+
+        $varName = Inflector::classify('editor' . $this->id);
+
+        if ($this->clientOptions['emoji']) {
+            $emoji = 'editormd.emoji = ' . Json::encode(['path' => 'http://www.webpagefx.com/tools/emoji-cheat-sheet/graphics/emojis/', 'ext' => ".png"]);
+            $view->registerJs($emoji);
         }
-        $this->textarea = Html::textArea($this->name, $this->value, $this->options);
-        $this->registerClientScript();
+        $view->registerJs("var editor{$this->id} = new editormd(\"{$varName}\", {$jsOptions});");
+        echo '<div id="' . $varName . '">' . $textarea . '</div>';
     }
 
 
@@ -72,24 +81,6 @@ class MarkdownEditorWidget extends InputWidget
             ],
         ];
         $this->clientOptions = array_merge($options, $this->clientOptions);
-    }
-
-    protected function registerClientScript()
-    {
-        $view = $this->getView();
-        $editor = MarkdownEditorAsset::register($view);
-        $this->clientOptions['path'] = $editor->baseUrl . '/lib/';
-
-        $jsOptions = empty ($this->clientOptions) ? '' : Json::htmlEncode($this->clientOptions);
-
-        $varName = Inflector::classify('editor' . $this->id);
-
-        if ($this->clientOptions['emoji']) {
-            $emoji = 'editormd.emoji = ' . Json::encode(['path' => 'http://www.webpagefx.com/tools/emoji-cheat-sheet/graphics/emojis/', 'ext' => ".png"]);
-            $view->registerJs($emoji);
-        }
-        $view->registerJs("var editor{$this->id} = new editormd(\"{$varName}\", {$jsOptions});");
-        echo '<div id="' . $varName . '">' . $this->textarea . '</div>';
     }
     
 
