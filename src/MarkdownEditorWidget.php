@@ -15,6 +15,7 @@ class MarkdownEditorWidget extends InputWidget
      * @var array
      */
     public $clientOptions = [];
+
     /**
      * {@inheritDoc}
      * @see \yii\base\Object::init()
@@ -28,7 +29,6 @@ class MarkdownEditorWidget extends InputWidget
        $this->initClientOptions();
     }
 
-
     /**
      * Renders the widget.
      */
@@ -37,22 +37,25 @@ class MarkdownEditorWidget extends InputWidget
         $textarea = $this->hasModel() ? Html::activeTextArea($this->model, $this->attribute, $this->options) : Html::textArea($this->name, $this->value, $this->options);
 
         $view = $this->getView();
+        $id = $this->options ['id'];
         $editor = MarkdownEditorAsset::register($view);
         $this->clientOptions['path'] = $editor->baseUrl . '/lib/';
 
         $jsOptions = empty ($this->clientOptions) ? '' : Json::htmlEncode($this->clientOptions);
 
-        $varName = Inflector::classify('editor' . $this->id);
+        $varName = Inflector::classify('editor' . $id);
 
         if ($this->clientOptions['emoji']) {
             $emoji = 'editormd.emoji = ' . Json::htmlEncode(['path' => 'http://www.webpagefx.com/tools/emoji-cheat-sheet/graphics/emojis/', 'ext' => ".png"]);
             $view->registerJs($emoji);
         }
-        $view->registerJs("var editor{$this->id} = new editormd(\"{$varName}\", {$jsOptions});");
+        $view->registerJs("var editor{$id} = new editormd(\"{$varName}\", {$jsOptions});");
         echo '<div id="' . $varName . '">' . $textarea . '</div>';
     }
 
-
+    /**
+     * Init Client Options
+     */
     public function initClientOptions()
     {
         $options = [

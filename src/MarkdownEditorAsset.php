@@ -6,7 +6,11 @@ use yii\web\AssetBundle;
 class MarkdownEditorAsset extends AssetBundle
 {
     public $sourcePath = '@bower/editor.md';
-    
+
+    public $depends = [
+        'yii\web\JqueryAsset',
+    ];
+
     public function init()
     {
         $this->css = ['css/editormd.css', 'css/editormd.logo.css', 'css/editormd.preview.css'];
