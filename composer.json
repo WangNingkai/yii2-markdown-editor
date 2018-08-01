@@ -14,8 +14,7 @@
         "email": "ningkai.wang@live.com"
     }],
     "require": {
-        "yiisoft/yii2": "*",
-        "bower-asset/editor.md": "*"
+        "yiisoft/yii2": "*"
     },
     "autoload": {
         "psr-4": {
