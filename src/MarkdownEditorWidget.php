@@ -31,7 +31,7 @@ class MarkdownEditorWidget extends InputWidget
     {
         $view = $this->getView();
         $this->initClientOptions();
-        $editor = EditorMdAsset::register($view);
+        $editor = MarkdownEditorAsset::register($view);
         $this->clientOptions['value'] = $this->value ? $this->value : '';
         $this->clientOptions['name'] = $this->name;
         $this->clientOptions['path'] = $editor->baseUrl . '/lib/';
