@@ -16,6 +16,7 @@ class MarkdownEditorWidget extends InputWidget
      */
     public $clientOptions = [];
 
+    public $textarea;
     /**
      * {@inheritDoc}
      * @see \yii\base\Object::init()
@@ -36,9 +37,9 @@ class MarkdownEditorWidget extends InputWidget
     public function run()
     {
         if ($this->hasModel()) {
-            $textarea = Html::activeTextArea($this->model, $this->attribute, $this->options);
+            $this->textarea = Html::activeTextArea($this->model, $this->attribute, $this->options);
         }
-        $textarea = Html::textArea($this->name, $this->value, $this->options);
+        $this->textarea = Html::textArea($this->name, $this->value, $this->options);
         $this->registerClientScript();
     }
 
@@ -88,7 +89,7 @@ class MarkdownEditorWidget extends InputWidget
             $view->registerJs($emoji);
         }
         $view->registerJs("var editor{$this->id} = new editormd(\"{$varName}\", {$jsOptions});");
-        echo '<div id="' . $varName . '">' . $textarea . '</div>';
+        echo '<div id="' . $varName . '">' . $this->textarea . '</div>';
     }
     
 
