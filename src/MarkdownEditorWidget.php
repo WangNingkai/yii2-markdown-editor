@@ -17,8 +17,7 @@ class MarkdownEditorWidget extends InputWidget
     public $clientOptions = [];
 
     /**
-     * {@inheritDoc}
-     * @see \yii\base\Object::init()
+     * Init the Widget
      */
     public function init()
     {
