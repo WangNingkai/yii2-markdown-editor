@@ -1,0 +1,25 @@
+{
+    "name": "wangningkai/yii2-markdown-editor",
+    "description": "Yii2 Markdown Editor",
+    "type": "yii2-extension",
+    "keywords": [
+        "yii2",
+        "extension",
+        "editor",
+        "editor.md"
+    ],
+    "license": "BSD-4-Clause",
+    "authors": [{
+        "name": "WangNingkai",
+        "email": "ningkai.wang@live.com"
+    }],
+    "require": {
+        "yiisoft/yii2": "*",
+        "bower-asset/editor.md": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "WangNingkai\\MarkdownEditor\\": "src"
+        }
+    }
+}
