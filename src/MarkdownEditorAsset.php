@@ -5,15 +5,17 @@ use yii\web\AssetBundle;
 
 class MarkdownEditorAsset extends AssetBundle
 {
-    public $sourcePath = '@bower/editor.md';
+    public $sourcePath = '@vendor/wangningkai/yii2-markdown-editor/assets';
 
+    public $js = [
+        'editormd.min.js',
+    ];
+    public $css = [
+        'css/editormd.min.css',
+        'css/editormd.logo.css',
+        'css/editormd.preview.css'
+    ];
     public $depends = [
         'yii\web\JqueryAsset',
     ];
-
-    public function init()
-    {
-        $this->css = ['css/editormd.css', 'css/editormd.logo.css', 'css/editormd.preview.css'];
-        $this->js = ['editormd.min.js'];
-    }
 }
