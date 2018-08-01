@@ -45,7 +45,7 @@ class MarkdownEditorWidget extends InputWidget
         $varName = Inflector::classify('editor' . $this->id);
 
         if ($this->clientOptions['emoji']) {
-            $emoji = 'editormd.emoji = ' . Json::encode(['path' => 'http://www.webpagefx.com/tools/emoji-cheat-sheet/graphics/emojis/', 'ext' => ".png"]);
+            $emoji = 'editormd.emoji = ' . Json::htmlEncode(['path' => 'http://www.webpagefx.com/tools/emoji-cheat-sheet/graphics/emojis/', 'ext' => ".png"]);
             $view->registerJs($emoji);
         }
         $view->registerJs("var editor{$this->id} = new editormd(\"{$varName}\", {$jsOptions});");
