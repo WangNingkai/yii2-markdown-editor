@@ -5,7 +5,6 @@ use yii\bootstrap\InputWidget;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\helpers\Inflector;
-use yii\web\JsExpression;
 
 
 class MarkdownEditorWidget extends InputWidget
@@ -17,8 +16,7 @@ class MarkdownEditorWidget extends InputWidget
     public $clientOptions = [];
 
     /**
-     * {@inheritDoc}
-     * @see \yii\base\Object::init()
+     * Init the Widget
      */
     public function init()
     {
@@ -26,7 +24,7 @@ class MarkdownEditorWidget extends InputWidget
         if (!isset ($this->options ['id'])) {
             $this->options ['id'] = $this->getId();
         }
-       $this->initClientOptions();
+        $this->initClientOptions();
     }
 
     /**
@@ -59,17 +57,31 @@ class MarkdownEditorWidget extends InputWidget
     public function initClientOptions()
     {
         $options = [
-            'watch' => true,
-            'emoji' => true,
-            'syncScrolling' => true,
-            'searchReplace' => true,
-            'taskList' => true,
-            'tocm' => true,
-            'tex' => true,
-            'flowChart' => true,
-            'sequenceDiagram' => true,
+            'width' => '100%',
             'height' => "600",
-            'htmlDecode' => "style,script,iframe|on*",
+            'theme' => 'default',
+            'previewTheme' => 'default',
+            'editorTheme' => 'base16-light',
+//            'markdown' => '',
+            'codeFold' => true, // 代码折叠
+            'syncScrolling' => true, // 同步预览
+            'saveHTMLToTextarea' => true,    // 保存 HTML 到 Textarea
+            'searchReplace' => true, // 搜索
+            'watch' => true, // 关闭预览
+            'htmlDecode' => "style,script,iframe|on*",  // 开启 HTML 标签解析，为了安全性，默认不开启
+            'toolbar ' => false,             //关闭工具栏
+            'previewCodeHighlight' => false, // 关闭预览 HTML 的代码块高亮，默认开启
+            'emoji' => true, // 表情
+            'taskList' => true, // 任务栏
+            'tocm           ' => true,         // Using [TOCM]
+            'tex' => true,    // 开启科学公式TeX语言支持，默认关闭
+            'flowChart' => true,             // 开启流程图支持，默认关闭
+            'sequenceDiagram' => true,       // 开启时序/序列图支持，默认关闭,
+            // 'dialogLockScreen' => false,   // 设置弹出层对话框不锁屏，全局通用，默认为true
+            // 'dialogShowMask' => false,     // 设置弹出层对话框显示透明遮罩层，全局通用，默认为true
+            // 'dialogDraggable' => false,    // 设置弹出层对话框不可拖动，全局通用，默认为true
+            // 'dialogMaskOpacity' => 0.4,    // 设置透明遮罩层的透明度，全局通用，默认值为0.1
+            // 'dialogMaskBgColor' => '#000', // 设置透明遮罩层的背景颜色，全局通用，默认为#fff
             'placeholder' => "欢迎使用MarkDown编辑器",
             'toolbarIcons' => [
                 "undo", "redo", "|",
@@ -85,6 +97,6 @@ class MarkdownEditorWidget extends InputWidget
         ];
         $this->clientOptions = array_merge($options, $this->clientOptions);
     }
-    
+
 
 }
