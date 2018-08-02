@@ -146,7 +146,7 @@ class UploadFileAction extends Action
     }
 
     /**
-     * @inheritdoc
+     * @return array
      */
     public function run()
     {
@@ -162,6 +162,9 @@ class UploadFileAction extends Action
         return $result;
     }
 
+    /**
+     * @return array
+     */
     public function uploadImage()
     {
         if (!Yii::$app->request->isPost) {
@@ -194,6 +197,9 @@ class UploadFileAction extends Action
         return $result;
     }
 
+    /**
+     * @return DynamicModel
+     */
     protected function getImageModel()
     {
         $file = UploadedFile::getInstanceByName($this->uploadParam);
@@ -261,6 +267,11 @@ class UploadFileAction extends Action
         return $resultUrl;
     }
 
+    /**
+     * @param $path
+     * @param $profile
+     * @return mixed
+     */
     public function getThumbFilePath($path, $profile)
     {
         return str_ireplace(Yii::getAlias($this->path), Yii::getAlias($this->thumbPath) . $profile . DIRECTORY_SEPARATOR, $path);
